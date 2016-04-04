@@ -1,0 +1,9 @@
+{
+  "name": "pkm",
+  "description": "Pakage manager abstraction and configuration generator",
+  "license": "MIT",
+  "devDependencies": {
+    "jasmine": "^2.4.1",
+    "typescript": "^1.8.9"
+  }
+}
