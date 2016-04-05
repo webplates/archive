@@ -1,7 +1,11 @@
 {
   "name": "pkm",
-  "description": "Pakage manager abstraction and configuration generator",
+  "description": "Package manager abstraction and configuration generator",
   "license": "MIT",
+  "scripts": {
+    "compile": "tsc",
+    "test": "tsc && tsc spec/*.ts && jasmine"
+  },
   "devDependencies": {
     "jasmine": "^2.4.1",
     "typescript": "^1.8.9"

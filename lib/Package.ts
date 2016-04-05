@@ -1,4 +1,9 @@
-export default class Package {
-    name: string;
-    version: string;
+import Dependency from "./Dependency";
+
+export interface Package {
+    getDependencies(): Dependency[];
+    addDependency(dep: Dependency): void;
+
+    getDevDependencies(): Dependency[];
+    addDevDependency(dep: Dependency): void;
 }

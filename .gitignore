@@ -1,2 +1,4 @@
 node_modules/
+spec/**/*Spec.js
 src/
+typings/
