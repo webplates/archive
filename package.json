@@ -1,6 +1,6 @@
 {
   "name": "pkm",
-  "version": "v0.0.2",
+  "version": "v0.0.4",
   "description": "Package manager abstraction and configuration generator",
   "repository": "git@github.com:webplates/pkm.git",
   "license": "MIT",
