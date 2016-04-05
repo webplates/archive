@@ -1,0 +1,27 @@
+language: node_js
+
+sudo: false
+
+node_js:
+    - 4.0
+    - 4.1
+    - 4.2
+    - 4
+    - 5.1
+    - 5
+
+install:
+    - npm install
+    - "./node_modules/.bin/typings install"
+
+script:
+    - npm run test
+
+deploy:
+    provider: npm
+    email: mark.sagikazar@gmail.com
+    api_key:
+        secure: pW40c1S7X3DLW4OYOUJ1weCUvcEWdps7D2WJhMCZbNnHKni4HSNVmJjuTqOPeSRHG86JeNdzaPyvMEaIuJwKnYI6crWUEpcZwbNl2rBvrTvl6n0qA68JzC9hUC59UGud2Uja4iXjVvnJJm2bZyHGVcXGXTZlcg9sXzX4Nv4D8LLrEFSSocAZadqs2f2iUd3VsFiyl09VmULlXlOAUAUu0reVrWMxyo92+RDX7lf0UThRwM5Urn+4tyv4a1WQOJ2j8ZE+V3+JnRChW/T/J5Qj5Bq6XU/9mBU3R0HLCiCOz4mT/NT5zL0Fo4+DJqvTu1Skg8crHcUTN/HgKmGs6eG7rgct0vxhWKoLt/xESRuNajx3LFe0n8uohBVzp8M1gPKBq4Nk8Wol5sx1GkI0bpL+2IyjAe3mdXZ6911R4F4oHy4ZpAX/1uvQw908oOaPBkXDTI41XP9uEZYdslyjPjCz/NS918N1kr5tC7+7wMdwJg1mFL/2nAC2i51UDsB/CG90qgZg6ISQsKIbGQ2kT6b1B4wL15s5jmC9pqqJtFPQtDk0NYMMtWMSNmBBLoxJIYkVUaX3DAMVHRX/uDJrpOsIZV01aKWs+4MyqhVMBnYajG9ZJ9qY+RgMHvvi95Q0sgzYPinvCk92AUHoaJfGOWNDBEOXBbeg8YOMCvphkuwVIoM=
+    on:
+        tags: true
+        repo: webplates/pkm
