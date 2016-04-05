@@ -2,6 +2,8 @@
   "name": "pkm",
   "description": "Package manager abstraction and configuration generator",
   "license": "MIT",
+  "main": "./src/index.js",
+  "typings": "./src/index.d.ts",
   "scripts": {
     "compile": "tsc",
     "test": "tsc && tsc spec/*.ts && jasmine"
