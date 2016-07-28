@@ -18,7 +18,7 @@ EXCLUSIONS = set(itertools.product(VERSIONS, ["apache"], ["alpine"]))
 
 MATRIX = MATRIX.difference(EXCLUSIONS)
 
-NODE = ["6.3.3"]
+NODE = ["6.3.1"]
 
 env = Environment(loader=FileSystemLoader(os.path.dirname(os.path.realpath(__file__))))
 

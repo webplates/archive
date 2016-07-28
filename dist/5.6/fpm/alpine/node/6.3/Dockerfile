@@ -1,6 +1,6 @@
 FROM php:5.6-fpm-alpine
 
-ENV NODE_VERSION 6.3.3
+ENV NODE_VERSION 6.3.1
 ENV NPM_CONFIG_LOGLEVEL info
 
 RUN apk add --no-cache \
