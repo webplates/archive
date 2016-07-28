@@ -2,6 +2,7 @@ import itertools
 from jinja2 import Environment, FileSystemLoader
 import os
 import shutil
+import semver
 
 VERSIONS = [5.5, 5.6, 7.0]
 BUILDS = ["fpm"]
@@ -17,7 +18,7 @@ EXCLUSIONS = set(itertools.product(VERSIONS, ["apache"], ["alpine"]))
 
 MATRIX = MATRIX.difference(EXCLUSIONS)
 
-NODE = [6.3]
+NODE = ["6.3.3"]
 
 env = Environment(loader=FileSystemLoader(os.path.dirname(os.path.realpath(__file__))))
 
@@ -42,7 +43,8 @@ for element in MATRIX:
     for version in NODE:
         docker = template.render(parent=matrix_join(element, "-"), version=version, distro=element[2])
         path_elements = list(element)
-        path_elements.extend(["node", str(version)])
+        version_info = semver.parse(version)
+        path_elements.extend(["node", str(version_info["major"]) + "." + str(version_info["minor"])])
         path = "dist/" + matrix_join(path_elements, "/") + "/"
         dockerfile = path + "Dockerfile"
         os.makedirs(os.path.dirname(dockerfile), exist_ok=True)
