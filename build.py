@@ -3,6 +3,8 @@ from jinja2 import Environment, FileSystemLoader
 import os
 import shutil
 import semver
+import requests
+import sys
 
 VERSIONS = [5.5, 5.6, 7.0]
 BUILDS = ["fpm"]
@@ -30,6 +32,37 @@ def matrix_join( matrix, separator ):
 
     return separator.join(valid_matrix)
 
+def delete_builds( token ):
+    headers = {'Authorization': token}
+    builds = [];
+
+    response = requests.get("https://hub.docker.com/v2/repositories/webplates/php/autobuild/tags/", headers=headers)
+
+    if response.status_code == 200:
+        body = response.json()
+        builds.extend(body["results"])
+
+        while not (body["next"] is None):
+            response = requests.get(body["next"], headers=headers)
+
+            if response.status_code == 200:
+                body = response.json()
+                builds.extend(body["results"])
+            else:
+                raise Exception("Invalid response")
+    else:
+        raise Exception("Invalid response")
+
+    for build in builds:
+        requests.delete("https://hub.docker.com/v2/repositories/webplates/php/autobuild/tags/%s/" % (build["id"]), headers=headers)
+
+def add_builds (token, paths, tags):
+    headers = {'Authorization': token}
+
+    for i in range(0, len(paths)):
+        build = {"name": tags[i], "dockerfile_location": paths[i], "source_name": "master", "source_type": "Branch", "namespace": "webplates", "repoName": "php", "isNew": True}
+        requests.post("https://hub.docker.com/v2/repositories/webplates/php/autobuild/tags/", headers=headers, data=build)
+
 template = env.get_template('Dockerfile-node.template')
 
 if os.path.isdir("dist"):
@@ -54,9 +87,15 @@ for element in MATRIX:
         tags.append(matrix_join(path_elements, "-"));
 
 paths.sort()
-paths.insert(0, "PATH")
 tags.sort()
-tags.insert(0, "TAG")
 
+with open(".auth", "r") as f:
+    token = f.readline().rstrip()
+
+delete_builds(token)
+add_builds(token, paths, tags)
+
+paths.insert(0, "PATH")
+tags.insert(0, "TAG")
 for c1, c2 in zip(paths, tags):
     print ("%-35s %s" % (c1, c2))
