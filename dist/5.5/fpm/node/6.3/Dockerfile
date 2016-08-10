@@ -1,4 +1,4 @@
-FROM php:5.5-fpm
+FROM php:5.5.38-fpm
 
 ENV NODE_VERSION 6.3.1
 ENV NPM_CONFIG_LOGLEVEL info
