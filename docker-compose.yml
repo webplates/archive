@@ -1,0 +1,25 @@
+version: '2'
+
+services:
+    elasticsearch:
+        image: elasticsearch
+        command: elasticsearch -Des.network.host=0.0.0.0
+        expose:
+            - 9200
+
+    kibana:
+        image: kibana
+        ports:
+            - 5601
+        environment:
+            - ELASTICSEARCH_URL=http://elasticsearch:9200
+        links:
+            - elasticsearch
+
+    logstash:
+        image: logstash
+        command: logstash -f /etc/logstash/logstash.conf
+        links:
+            - elasticsearch
+        volumes:
+            - ./logstash:/etc/logstash
