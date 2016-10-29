@@ -1,6 +1,6 @@
 # Read the Docs Docker image
 
-This image includes tools for building Read the Docs documentation for PHP projects.
+**Docker image for building Read the Docs documentation (mainly) for PHP projects.**
 
 
 ## Usage
@@ -69,3 +69,8 @@ In short: the user running in the container gets the UID from the HOST computer.
 
 In most cases it should work fine, but it could cause some issues when the
 host UID is already taken in the container.
+
+
+## License
+
+The MIT License (MIT). Please see [License File](LICENSE) for more information.
