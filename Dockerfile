@@ -1,9 +1,6 @@
 FROM alpine:3.4
 
-RUN adduser -S doc
-
 RUN set -xe \
-    && echo "http://nl.alpinelinux.org/alpine/edge/community" | tee -a /etc/apk/repositories \
     && apk --no-cache add \
         bash \
         enchant \
@@ -12,9 +9,7 @@ RUN set -xe \
         make \
         python \
         py-pip \
-        inotify-tools \
-        su-exec \
-        shadow
+        inotify-tools
 
 COPY requirements.txt .
 
