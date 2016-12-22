@@ -57,7 +57,7 @@ Typing the above commands is not really convenient. With a simple alias you can
 simplify the executed commands:
 
 ``` bash
-alias doc="docker run --rm --tty --interactive --volume $PWD:/doc --user $(id -u):$(id -g) webplates/readthedocs"
+alias doc='docker run --rm --tty --interactive --volume `pwd`:/doc --user $(id -u):$(id -g) webplates/readthedocs'
 ```
 
 (Put this in your shell startup script: `~/.bashrc`, `~/.zshrc`, etc)
